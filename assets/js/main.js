@@ -8,10 +8,8 @@ $('document').ready(function () {
 
   // Disable animations/transitions until the page has loaded.
   $body.addClass('is-loading');
-  NProgress.start();
   $window.on('load', function() {
     $body.removeClass('is-loading');
-    NProgress.done();
   });
 });
 /*
