@@ -71,7 +71,6 @@ gems:
   - jekyll-feed
 # Build settings
 markdown: kramdown
-production_url : https://qualite-percue.org
 compress_html:
   clippings: [div, p, ul, td, h1, h2, video]
   comments: ["<!-- ", " -->"]
