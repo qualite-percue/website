@@ -1,0 +1,31 @@
+{% assign registeredTags = "Jekyll|Recipe|Event|Meteor|Algorithm|Web Design|UX|Vanilla JS|UX|News|Website XP" | split: "|" %}
+{% assign availableColors = "green|violet|cyan|pink|olive|black"  | split: "|" %}
+{% assign unregisteredTags = ""  | split: "" %}
+{% for post in site.posts reversed %}
+  {% for tag in post.tags %}
+    {% if registeredTags contains tag %}
+    {% else %}
+      {% assign unregisteredTags = unregisteredTags  | push: tag %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+{% for tag in include.tags %}
+  {% case tag %}
+  {% when "News" %} <a class="ui tag label">News</a>
+  {% when "Jekyll" %}<a class="ui purple tag label">Jekyll</a>
+  {% when "Meteor" %}<a class="ui red tag label">Meteor</a>
+  {% when "Event" %}<a class="ui orange tag label">Event</a>
+  {% when "Vanilla JS" %}<a class="ui pink tag label">Vanilla JS</a>
+  {% when "UX" %}<a class="ui brown tag label">User Experience</a>
+  {% when "Recipe" %}<a class="ui grey tag label">Recipe</a>
+  {% when "Website XP" %}<a class="ui teal tag label">Website XP</a>
+  {% else %}
+    {% for unregisteredTag in unregisteredTags %}
+      {% if tag == unregisteredTag %}
+        {% for color in availableColors limit:1 offset:forloop.index %}
+          <a class="ui tag label {{ color }}">{{ tag }}</a>
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  {% endcase %}
+{% endfor %}

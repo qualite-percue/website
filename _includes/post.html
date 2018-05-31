@@ -1,0 +1,28 @@
+    {% if include.featured %}<article class="ui segment featured">
+    <div class="ui featured right ribbon label">Editorial</div>
+    {% else %}
+    <article class="ui segment">
+    {% endif%}
+    <div class="content">
+      <h1 class="ui header">{{ post.title }}
+
+        <div class="ui sub header">{{ post.date | date: "%d %B %Y" }}{% if post.comments %} -  <a href="http://blog.neatastic.com{{ url }}#disqus_thread"><i class="icon comments"></i></a><a href="http://blog.neatastic.com/{{ post.url }}#disqus_thread" data-disqus-identifier="{{post.id}}">0 Comments</a>{% endif %}</div>
+        {% include tag.html tags=post.tags %}
+
+      </h1>
+
+      <div class="description">
+        {% if post.full %}
+        {{ post.content }}
+        {% else %}
+        {{ post.excerpt}} &hellip;
+        {% endif %}
+      </div>
+    </div>
+    {% unless post.full %}
+    <div class="extra content">
+      <a href="{{ post.url }}" class="ui button">Read more &hellip;</a>
+    </div>
+    {% endunless %}
+    {% include disqus.html %}
+  </article>
