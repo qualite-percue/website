@@ -1,7 +1,7 @@
 ---
 # Front matter comment to ensure Jekyll properly reads file.
 ---
-@charset "UTF-8";
+@charset  "UTF-8";
 @import 'libs/vars';
 @import 'libs/functions';
 @import 'libs/mixins';
@@ -337,7 +337,7 @@ textarea {
 
 input[type="checkbox"],
 input[type="radio"],
-{
+ {
 	@include vendor('appearance', 'none');
 	display: block;
 	float: left;
@@ -434,9 +434,9 @@ input[type="radio"] {
 	margin-bottom: _size(element-margin);
 	padding: 1.5em;
 
-	> :last-child,
-	> :last-child > :last-child > :last-child,
-	> :last-child > :last-child {
+	> :last-child > :last-child,
+	 > :last-child > :last-child > :last-child,
+	> :last-child {
 		margin-bottom: 0;
 	}
 
@@ -466,7 +466,11 @@ input[type="radio"] {
 		line-height: 3em;
 		text-align: center;
 		width: calc(3em + 2px);
+@include vendor('transition', 'all 0.5s ease');
+&~ h4  {
+	@include vendor('transition', 'all 0.5s ease');
 
+}
 		&:before {
 			@include vendor('transform', 'rotate(45deg)');
 			display: inline-block;
@@ -474,6 +478,13 @@ input[type="radio"] {
 		}
 		@include breakpoint(small) {
 			font-size: 1em;
+		}
+		&:hover {
+			border: solid 4px _palette(accent6, bg);
+			color:  _palette(accent6, bg);
+			&~ h4 {
+				color:  _palette(accent6, bg);
+			}
 		}
 	}
 
@@ -712,80 +723,7 @@ ul {
 dl {
 	margin: 0 0 _size(element-margin);
 }
-/* Table */
-.table-wrapper {
-	-webkit-overflow-scrolling: touch;
-	overflow-x: auto;
-}
 
-table {
-	margin: 0 0 _size(element-margin);
-	width: 100%;
-
-	tbody {
-		tr {
-			border: solid 1px _palette(border);
-			border-left: 0;
-			border-right: 0;
-
-			&:nth-child(2n + 1) {
-				background-color: _palette(border-bg);
-			}
-		}
-	}
-
-	td {
-		padding: 0.75em;
-	}
-
-	th {
-		color: _palette(fg-bold);
-		font-size: 0.9em;
-		font-weight: _font(weight-bold);
-		padding: 0 0.75em 0.75em;
-		text-align: left;
-	}
-
-	thead {
-		border-bottom: solid 2px _palette(border);
-	}
-
-	tfoot {
-		border-top: solid 2px _palette(border);
-	}
-
-	&.alt {
-		border-collapse: separate;
-
-		tbody {
-			tr {
-				td {
-					border: solid 1px _palette(border);
-					border-left-width: 0;
-					border-top-width: 0;
-
-					&:first-child {
-						border-left-width: 1px;
-					}
-				}
-
-				&:first-child {
-					td {
-						border-top-width: 1px;
-					}
-				}
-			}
-		}
-
-		thead {
-			border-bottom: 0;
-		}
-
-		tfoot {
-			border-top: 0;
-		}
-	}
-}
 /* Button */
 input[type="submit"],
 input[type="reset"],
@@ -888,7 +826,9 @@ button,
 				background-color: rgba(0,0,0, $j);
 			}
 		}
-
+&:hover::before {
+	color: _palette(accent6, bg);
+}
 		&:before {
 			display: block;
 			color: _palette(accent2, bg);
@@ -941,27 +881,39 @@ button,
 	@include vendor('align-items', 'center');
 	@include vendor('display', 'flex');
 
+	&:hover {
+		.image {
+			img {
+				@include vendor('transform', 'scale(1.1)');
+			}
+		}
+	}
+
 	.image {
 		@include vendor('order', '1');
 		border-radius: 0;
 		width: 40%;
+		overflow: hidden;
 
 		img {
+			@include vendor('transition', 'all 1.5s ease-in-out');
 			border-radius: 0;
 			width: 100%;
 		}
 	}
-&#three {
-	background-color: #415a7e;
 
-}
+	&#three {
+		background-color: #415a7e;
+	}
+
 	.content {
 		@include padding(2em, 4em);
 		@include vendor('order', '2');
 		max-width: 48em;
 		width: 60%;
+
 		h2 span {
-		  box-shadow: inset 0 -4px 0 _palette(accent6, bg);
+			box-shadow: inset 0 -4px 0 _palette(accent6, bg);
 		}
 	}
 
@@ -1083,7 +1035,7 @@ button,
 
 	input[type="checkbox"],
 	input[type="radio"],
-	{
+	 {
 		& + label {
 			color: _palette($p, fg);
 
